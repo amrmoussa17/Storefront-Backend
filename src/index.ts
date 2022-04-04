@@ -5,15 +5,19 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
+
 // create an instance server
 const app: Application = express()
+
 // HTTP request logger middleware
 app.use(morgan('short'))
+// bodyparse middleware
+app.use(express.json())
 
 // add routing for / path
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message: 'Hello World 🌍'
+    message: 'welcome to storefront backend api'
   })
 })
 
