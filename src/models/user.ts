@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt'
 type User = {
   id?: number
   username: string
-  firstName: string
-  lastName: string
+  first_name: string
+  last_name: string
   email: string
   password?: string
 }
@@ -24,8 +24,8 @@ export default class UserStore {
         'INSERT INTO users (username, first_name, last_name, email, user_password) VALUES ($1, $2, $3, $4, $5) RETURNING id, username, first_name, last_name, email'
       const result = await conn.query(sql, [
         u.username,
-        u.firstName,
-        u.lastName,
+        u.first_name,
+        u.last_name,
         u.email,
         hashPass(u.password as string)
       ])
