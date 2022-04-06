@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
+import routes from './routes/index'
 
 dotenv.config()
 
@@ -14,6 +15,9 @@ app.use(morgan('short'))
 // bodyparse middleware
 app.use(express.json())
 
+// use routes
+app.use('/api', routes)
+
 // add routing for / path
 app.get('/', (req: Request, res: Response) => {
   res.json({
@@ -23,7 +27,7 @@ app.get('/', (req: Request, res: Response) => {
 
 // start express server
 app.listen(PORT, () => {
-  console.log(`Server is starting at prot:${PORT}`)
+  console.log(`Server is starting at port:${PORT}`)
 })
 
 export default app
