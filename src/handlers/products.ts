@@ -8,7 +8,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
     const product = await store.create(req.body)
     res.json({
       status: 'ok',
-      body: { ...product },
+      data: { ...product },
       message: 'product created successfully'
     })
   } catch (error) {
@@ -20,7 +20,7 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
     const product = await store.show(req.params.id)
     res.json({
       status: 'ok',
-      body: { ...product },
+      data: { ...product },
       message: `product retrieved successfully`
     })
   } catch (error) {
@@ -32,7 +32,7 @@ export const index = async (req: Request, res: Response, next: NextFunction) => 
     const products = await store.index()
     res.json({
       status: 'ok',
-      body: products,
+      data: products,
       message: `products retrieved successfully`
     })
   } catch (error) {
