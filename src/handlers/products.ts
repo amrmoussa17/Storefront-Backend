@@ -27,7 +27,7 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
-export const index = async (req: Request, res: Response, next: NextFunction) => {
+export const index = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const products = await store.index()
     res.json({

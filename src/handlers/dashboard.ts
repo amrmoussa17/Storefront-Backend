@@ -18,7 +18,7 @@ export const getCurrentOrder = async (req: Request, res: Response, next: NextFun
   }
 }
 // get top 5 products
-export const getTopProducts = async (req: Request, res: Response, next: NextFunction) => {
+export const getTopProducts = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const topFiveProducts = await dashboard.getTopProducts()
     res.json({
