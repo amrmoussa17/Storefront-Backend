@@ -14,7 +14,7 @@ export default class ProductStore {
       const result = await conn.query(sql, [product.product_name, product.price])
       return result.rows[0]
     } catch (error) {
-      throw new Error(`couldnt create new product ${error}`)
+      throw new Error(`couldn't create new product ${error}`)
     }
   }
 
@@ -36,7 +36,7 @@ export default class ProductStore {
       const result = await conn.query(sql)
       return result.rows
     } catch (error) {
-      throw new Error(`could not retreive all products ${error}`)
+      throw new Error(`could not retrieve all products ${error}`)
     }
   }
 }

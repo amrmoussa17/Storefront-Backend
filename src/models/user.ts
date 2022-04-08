@@ -59,7 +59,7 @@ export default class UserStore {
       conn.release()
       return result.rows
     } catch (error) {
-      throw new Error(`couldn't retreive users ${error}`)
+      throw new Error(`couldn't retrieve users ${error}`)
     }
   }
 
@@ -81,7 +81,7 @@ export default class UserStore {
       conn.release()
       return null
     } catch (error) {
-      throw new Error(`couldn't authorizate user ${error}`)
+      throw new Error(`couldn't authorize user ${error}`)
     }
   }
 }
