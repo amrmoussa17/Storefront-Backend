@@ -1,23 +1,21 @@
 import client from '../database'
+import { Product } from '../helpers/types'
 
-interface product {
-  id?: number
-  product_name: string
-  price: number
-}
-
+// database products CRUD actions
 export default class ProductStore {
-  async create(product: product) {
+  // create new product
+  async create(product: Product) {
     try {
       const conn = await client.connect()
       const sql = 'INSERT INTO products (product_name, price) VALUES ($1, $2) returning *'
       const result = await conn.query(sql, [product.product_name, product.price])
       return result.rows[0]
     } catch (error) {
-      throw new Error(`couldn't create new product ${error}`)
+      throw new Error(`could not create new product ${error}`)
     }
   }
 
+  // show product by id
   async show(id: string) {
     try {
       const conn = await client.connect()
@@ -29,6 +27,7 @@ export default class ProductStore {
     }
   }
 
+  // show products
   async index() {
     try {
       const conn = await client.connect()

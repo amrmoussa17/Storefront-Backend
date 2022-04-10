@@ -1,5 +1,5 @@
 import supertest from 'supertest'
-import app from '..'
+import app from '../..'
 
 // create a request object
 const request = supertest(app)

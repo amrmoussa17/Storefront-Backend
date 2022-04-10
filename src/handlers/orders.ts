@@ -15,26 +15,27 @@ export const createOrder = async (req: Request, res: Response, next: NextFunctio
     next(error)
   }
 }
-export const editOrder = async (req: Request, res: Response, next: NextFunction) => {
+export const addProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const order = await store.edit(req.body)
+    const orderProduct = await store.addProduct(req.body)
     res.json({
       status: 'ok',
-      data: order,
-      message: 'order updated successfully'
+      data: orderProduct,
+      message: 'product added to order successfully'
     })
   } catch (error) {
     next(error)
   }
 }
 
-export const deleteOrder = async (req: Request, res: Response, next: NextFunction) => {
+export const getCurrentOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const order = await store.delete(req.params.id)
+    const userId = req.params.id
+    const currentOrder = await store.getCurrentOrder(userId)
     res.json({
       status: 'ok',
-      data: order,
-      message: 'order deleted successfully'
+      data: currentOrder,
+      message: `current order by user: ${userId} retrieved successfully`
     })
   } catch (error) {
     next(error)

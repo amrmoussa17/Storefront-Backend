@@ -9,7 +9,7 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
     jwt.verify(token, config.tokenSecret)
     next()
   } catch (err) {
-    return res.status(401).json(`Access denied, invalid token, ${err}`)
+    return res.status(401).json(`Access denied, invalid token`)
   }
 }
 

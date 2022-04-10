@@ -1,22 +1,12 @@
 import config from '../config'
 import client from '../database'
 import bcrypt from 'bcrypt'
+import { User } from '../helpers/types'
+import { hashPass } from '../helpers/functions'
 
-type User = {
-  id?: number
-  username: string
-  first_name: string
-  last_name: string
-  email: string
-  password?: string
-}
-
-// using bcrypt module to hash user's password
-const hashPass = (pass: string) => {
-  return bcrypt.hashSync(`${pass}${config.pepper}`, config.saltRounds)
-}
-
+// database users CRUD actions
 export default class UserStore {
+  // create a new user
   async create(u: User): Promise<User> {
     try {
       const conn = await client.connect()
@@ -27,7 +17,7 @@ export default class UserStore {
         u.first_name,
         u.last_name,
         u.email,
-        hashPass(u.password as string)
+        hashPass(u.user_password as string)
       ])
       conn.release()
       return result.rows[0]
@@ -36,6 +26,7 @@ export default class UserStore {
     }
   }
 
+  // show a user by id
   async show(id: string): Promise<User> {
     try {
       const conn = await client.connect()
@@ -51,6 +42,7 @@ export default class UserStore {
     }
   }
 
+  // show all users
   async index(): Promise<User[]> {
     try {
       const conn = await client.connect()
@@ -59,10 +51,11 @@ export default class UserStore {
       conn.release()
       return result.rows
     } catch (error) {
-      throw new Error(`couldn't retrieve users ${error}`)
+      throw new Error(`couldn't retrieve all users ${error}`)
     }
   }
 
+  // authenticate user login credentials
   async authenticate(email: string, password: string): Promise<User | null> {
     try {
       const conn = await client.connect()
@@ -81,7 +74,7 @@ export default class UserStore {
       conn.release()
       return null
     } catch (error) {
-      throw new Error(`couldn't authorize user ${error}`)
+      throw new Error(`login error ${email}, ${error}`)
     }
   }
 }
