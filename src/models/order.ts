@@ -28,7 +28,7 @@ export default class OrderStore {
     }
   }
   // get current order by user
-  // here I could have specified the payload to be an object type, but i opted to go with any type so that I can complete unit testing for this model (expect(currentOrder[0].product_name)
+  // here I could have specified the payload to be an object type, but i opted to go with any type so that I can complete unit testing for this model
   async getCurrentOrder(userId: string): Promise<any[]> {
     try {
       const conn = await client.connect()
