@@ -55,7 +55,7 @@ describe('test order model', () => {
     })
 
     it('test create method logic', async () => {
-      const orderTest = await orderStore.create({
+      const orderTest: Order = await orderStore.create({
         user_id: 1,
         order_status: 'active'
       })

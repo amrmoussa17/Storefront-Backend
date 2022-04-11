@@ -10,7 +10,8 @@
     "build": "yarn clean && npx tsc",
     "start": "npm run build && node build/index.js",
     "format": "prettier --write 'src/**/*.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "reset": "db-migrate reset --env test"
   },
   "keywords": [],
   "author": "",

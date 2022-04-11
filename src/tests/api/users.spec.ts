@@ -3,7 +3,6 @@ import supertest from 'supertest'
 import client from '../../database'
 import UserStore from '../../models/user'
 import { User } from '../../helpers/types'
-import users from '../../routes/api/users'
 
 const userStore = new UserStore()
 // create a request object
@@ -69,7 +68,7 @@ describe('test users endpoint response', () => {
     expect(last_name).toBe('test 1')
     expect(email).toBe('user1@test.com')
   })
- 
+
   it('test users authenticate api with correct login credentials', async () => {
     const response = await request
       .post('/api/users/authenticate')
@@ -96,7 +95,7 @@ describe('test users endpoint response', () => {
       .set('Content-type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
-    const { username, first_name, last_name, email }  = response.body.data  
+    const { username, first_name, last_name, email } = response.body.data
     expect(response.status).toBe(200)
     expect(username).toBe('user 1')
     expect(first_name).toBe('user 1')
