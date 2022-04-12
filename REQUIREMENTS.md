@@ -12,12 +12,12 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Users:
 
-| Endpoint                   | verb     | Parameters                            | Requires Token | Usage               |
-| -------------------------- | -------- | ------------------------------------- | -------------- | ------------------- |
-| **api/users**              | **GET**  | **N/A**                               | **True** \*    | **show all Users**  |
-| **api/users**              | **POST** | **firstname,lastname,email,password** | **False**      | **Create User**     |
-| **api/users/:id**          | **GET**  | **id**                                | **True** \*    | **show user by Id** |
-| **api/users/authenticate** | **POST** | **email, password**                   | **False**      | **user login**      |
+| Endpoint                   | verb     | Parameters                                   | Requires Token | Usage               |
+| -------------------------- | -------- | -------------------------------------------- | -------------- | ------------------- |
+| **api/users**              | **GET**  | **N/A**                                      | **True** \*    | **show all Users**  |
+| **api/users**              | **POST** | **first_name,last_name,email,user_password** | **False**      | **Create User**     |
+| **api/users/:id**          | **GET**  | **id**                                       | **True** \*    | **show user by Id** |
+| **api/users/authenticate** | **POST** | **email, password**                          | **False**      | **user login**      |
 
 #### Products:
 
@@ -36,3 +36,41 @@ These are the notes from a meeting with the frontend developer that describe wha
 | **api/orders/user/id** | **GET**  | **user_id**                        | **True** \*    | **list user's current order** |
 
 - jwt token validation takes place upon user login successfully
+
+## Database Schema
+
+#### User
+
+| Field             | Type             | Special Attributes |
+| ----------------- | ---------------- | ------------------ |
+| **id**            | **Serial**       | **Primay Key**     |
+| **username**      | **Varchar(100)** | **N/A**            |
+| **first_name**    | **Varchar(100)** | **N/A**            |
+| **last_name**     | **Varchar(100)** | **N/A**            |
+| **email**         | **Varchar(100)** | **N/A**            |
+| **user_password** | **Varchar(100)** | **N/A**            |
+
+#### Product
+
+| Field            | Type             | Special Attributes |
+| ---------------- | ---------------- | ------------------ |
+| **id**           | **Serial**       | **Primary Key**    |
+| **product_name** | **Varchar(100)** | **N/A**            |
+| **price**        | **Integer**      | **N/A**            |
+
+#### Orders
+
+| Field            | Type             | Special Attributes |
+| ---------------- | ---------------- | ------------------ |
+| **id**           | **Serial**       | **Primary Key**    |
+| **user_id**      | **integer**      | **Foreign Key**    |
+| **order_status** | **Varchar(100)** | **N/A**            |
+
+#### Orders_Products
+
+| Field          | Type        | Special Attributes |
+| -------------- | ----------- | ------------------ |
+| **id**         | **Serial**  | **Primary Key**    |
+| **order_id**   | **integer** | **Foreign Key**    |
+| **product_id** | **integer** | **Foreign Key**    |
+| **quantity**   | **Integer** | **N/A**            |
