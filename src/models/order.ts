@@ -35,6 +35,7 @@ export default class OrderStore {
       const sql =
         "SELECT product_name, quantity FROM orders_products INNER JOIN orders ON orders_products.order_id = orders.id INNER JOIN products ON orders_products.product_id = products.id WHERE user_id=$1 AND order_status='active'"
       const result = await conn.query(sql, [userId])
+      conn.release()
       return result.rows
     } catch (error) {
       throw new Error(`could not get current order of user: ${userId} ${error}`)
